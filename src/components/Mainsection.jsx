@@ -15,18 +15,20 @@ const Mainsection = ({ bannerImages, bannerText, gridItems }) => {
 
   useEffect(() => {
     const interval = setInterval(handleNextImage, 3000);
-    return () => clearInterval(interval); 
+    return () => clearInterval(interval);
   }, [currentImageIndex]);
 
   return (
     <main className="bg-[#E6E6E6] pb-5 relative">
       <div
-        className="bg-cover h-80 flex justify-center items-end relative"
+        className="bg-cover bg-no-repeat bg-center h-80 md:h-[450px] lg:h-[550px] flex justify-center items-end relative"
         style={{
           backgroundImage: `url('${bannerImages[currentImageIndex]}')`,
+          backgroundSize: "contain", 
+          backgroundPosition: "center", 
         }}
       >
-        <div className="bg-white text-sm h-10 flex justify-center items-center w-[1460px] mb-6">
+        <div className="bg-white text-sm h-10 flex justify-center items-center w-full md:w-[1460px] mb-6">
           <p>
             {bannerText}{" "}
             <a
@@ -40,24 +42,24 @@ const Mainsection = ({ bannerImages, bannerText, gridItems }) => {
 
         <button
           onClick={handlePrevImage}
-          className="absolute left-4 top-1/2 transform -translate-y-1/2  bg-opacity-80 p-3 rounded-full shadow-lg hover:bg-opacity-90 z-10"
+          className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-opacity-80 p-3 rounded-full shadow-lg hover:bg-opacity-90 z-10 md:left-8"
         >
           <i className="fa-solid fa-arrow-left fa-lg text-gray-800"></i>
         </button>
 
         <button
           onClick={handleNextImage}
-          className="absolute right-4 top-1/2 transform -translate-y-1/2  bg-opacity-80 p-3 rounded-full shadow-lg hover:bg-opacity-90 z-10"
+          className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-opacity-80 p-3 rounded-full shadow-lg hover:bg-opacity-90 z-10 md:right-8"
         >
           <i className="fa-solid fa-arrow-right fa-lg text-gray-800"></i>
         </button>
       </div>
 
-      <div className="grid grid-cols-4 gap-4 px-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-4">
         {gridItems.map((item, index) => (
           <div key={index} className="bg-white p-4">
             <h2 className="text-xl font-bold">{item.title}</h2>
-            <img src={item.image} alt={item.title} className="my-3" />
+            <img src={item.image} alt={item.title} className="my-3 w-full h-auto" />
             <a href={item.link} className="text-xs text-[#007185]">
               {item.cta}
             </a>
